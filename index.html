@@ -8,185 +8,147 @@
     <style>
         :root {
             --tg-theme-bg-color: #ffffff;
-            --tg-theme-secondary-bg-color: #f0f2f5;
-            --tg-theme-button-color: #248bcf;
+            --tg-theme-secondary-bg-color: #f8f9fa;
+            --tg-theme-button-color: #0088cc;
             --tg-theme-button-text-color: #ffffff;
-            --accent-color: #ff3b30;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, system-ui, sans-serif;
             background-color: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
+            margin: 0; padding: 0; overflow-x: hidden;
         }
 
         header {
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
-            background: linear-gradient(135deg, #248bcf, #007aff);
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
             color: white;
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .container { padding: 15px; }
 
         .product-card {
             background: var(--tg-theme-secondary-bg-color);
-            border-radius: 18px;
-            margin-bottom: 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             padding: 12px;
-            border: 1px solid rgba(0,0,0,0.05);
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: 0.2s;
         }
 
         .product-img-wrapper {
-            width: 70px;
-            height: 70px;
-            background: white;
+            width: 85px; height: 85px;
             border-radius: 50%;
-            padding: 5px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 3px solid #fff;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             margin-right: 15px;
+            flex-shrink: 0;
         }
 
         .product-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
+            width: 100%; height: 100%; object-fit: cover;
         }
 
         .info { flex-grow: 1; }
-        .name { font-weight: 700; font-size: 16px; margin-bottom: 3px; display: block; }
-        .age { font-size: 13px; color: #8e8e93; }
-        .price { color: #28a745; font-weight: 800; font-size: 17px; display: block; margin-top: 4px; }
+        .name { font-weight: 700; font-size: 17px; color: #1f2937; }
+        .age { font-size: 13px; color: #6b7280; font-weight: normal; }
+        .price { color: #10b981; font-weight: 800; font-size: 18px; margin-top: 5px; display: block;}
 
         .order-btn {
-            background-color: var(--tg-theme-button-color);
-            color: var(--tg-theme-button-text-color);
+            background: var(--tg-theme-button-color);
+            color: white;
             border: none;
             padding: 10px 18px;
             border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.1s;
+            font-weight: bold;
+            font-size: 13px;
         }
 
-        .order-btn:active { transform: scale(0.95); }
-
-        /* Checkout Modal */
+        /* Modal Design */
         #checkoutOverlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: flex-end;
+            display: none; position: fixed;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+            z-index: 9999; align-items: flex-end;
         }
 
         .modal {
-            background: white;
-            width: 100%;
-            border-top-left-radius: 25px;
-            border-top-right-radius: 25px;
-            padding: 25px;
-            box-sizing: border-box;
-            animation: slideUp 0.3s ease-out;
+            background: white; width: 100%;
+            border-top-left-radius: 30px; border-top-right-radius: 30px;
+            padding: 30px 20px; box-sizing: border-box;
+            animation: slideUp 0.3s ease;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
+        @keyframes slideUp { from {transform: translateY(100%);} to {transform: translateY(0);} }
 
-        .modal h3 { margin-top: 0; color: #333; }
         input {
-            width: 100%;
-            padding: 14px;
-            margin: 8px 0;
-            border: 1.5px solid #eee;
-            border-radius: 12px;
-            box-sizing: border-box;
-            font-size: 16px;
-            background: #f9f9f9;
+            width: 100%; padding: 15px; margin: 10px 0;
+            border: 1.5px solid #e5e7eb; border-radius: 15px;
+            font-size: 16px; background: #f9fafb; outline: none;
         }
 
         .confirm-btn {
-            background: #28a745;
-            color: white;
-            width: 100%;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 16px;
-            margin-top: 15px;
+            background: #10b981; color: white; width: 100%;
+            border: none; padding: 16px; border-radius: 15px;
+            font-weight: bold; font-size: 17px; margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 style="margin:0; font-size: 22px;">KOCHI PRIVATE STORE</h1>
-    <p style="margin:5px 0 0; font-size:12px; opacity:0.8;">Premium Desi Collections</p>
+    <h1 style="margin:0; letter-spacing: 1px;">KOCHI PRIVATE STORE</h1>
+    <p style="margin:5px 0 0; opacity: 0.9; font-size: 13px;">Premium Desi Models & Styles</p>
 </header>
 
-<div class="container" id="product-list">
-    </div>
+<div class="container" id="product-list"></div>
 
 <div id="checkoutOverlay">
     <div class="modal">
-        <h3 id="modalTitle">Order Details</h3>
-        <input type="text" id="custName" placeholder="മുഴുവൻ പേര് (Full Name)">
+        <h3 id="modalTitle" style="margin-top:0; color:#111827;">Confirm Order</h3>
+        <input type="text" id="custName" placeholder="പേര് (Full Name)">
         <input type="tel" id="custPhone" placeholder="മൊബൈൽ നമ്പർ (Mobile Number)">
-        <input type="text" id="custAddr" placeholder="സ്ഥലം / വിലാസം (Address)">
+        <input type="text" id="custAddr" placeholder="സ്ഥലം (Location)">
         <button class="confirm-btn" onclick="finalSubmit()">CONFIRM ORDER</button>
-        <button onclick="closeModal()" style="background:none; border:none; width:100%; margin-top:10px; color:#888;">Cancel</button>
+        <button onclick="closeModal()" style="background:none; border:none; width:100%; margin-top:15px; color:#9ca3af;">Cancel</button>
     </div>
 </div>
 
 <script>
     const tg = window.Telegram.WebApp;
     tg.expand();
-    tg.ready();
 
     let selectedItem = "";
     let selectedPrice = 0;
 
+    // Realistic Desi/Kerala AI Avatars
     const products = [
-        {n: "Meenakshi", a: 22, p: 4500, id: 1},
-        {n: "Athira", a: 24, p: 9800, id: 2},
-        {n: "Lakshmi", a: 21, p: 3200, id: 3},
-        {n: "Parvathi", a: 26, p: 1950, id: 4},
-        {n: "Chithra", a: 23, p: 1100, id: 5},
-        {n: "Malavika", a: 25, p: 5400, id: 6},
-        {n: "Nandhini", a: 20, p: 6100, id: 7},
-        {n: "Shreya", a: 27, p: 2800, id: 8},
-        {n: "Anjali", a: 29, p: 7500, id: 9},
-        {n: "Gopika", a: 30, p: 10000, id: 10}
+        {n: "Meenakshi", a: 22, p: 4500, img: "https://xsgames.co/randomusers/assets/avatars/female/12.jpg"},
+        {n: "Athira", a: 24, p: 9800, img: "https://xsgames.co/randomusers/assets/avatars/female/25.jpg"},
+        {n: "Lakshmi", a: 21, p: 3200, img: "https://xsgames.co/randomusers/assets/avatars/female/45.jpg"},
+        {n: "Parvathi", a: 26, p: 1950, img: "https://xsgames.co/randomusers/assets/avatars/female/52.jpg"},
+        {n: "Chithra", a: 23, p: 1100, img: "https://xsgames.co/randomusers/assets/avatars/female/3.jpg"},
+        {n: "Malavika", a: 25, p: 5400, img: "https://xsgames.co/randomusers/assets/avatars/female/18.jpg"},
+        {n: "Nandhini", a: 20, p: 6100, img: "https://xsgames.co/randomusers/assets/avatars/female/8.jpg"},
+        {n: "Shreya", a: 27, p: 2800, img: "https://xsgames.co/randomusers/assets/avatars/female/32.jpg"},
+        {n: "Anjali", a: 29, p: 7500, img: "https://xsgames.co/randomusers/assets/avatars/female/19.jpg"},
+        {n: "Gopika", a: 30, p: 10000, img: "https://xsgames.co/randomusers/assets/avatars/female/42.jpg"}
     ];
 
-    const listContainer = document.getElementById('product-list');
-
+    const list = document.getElementById('product-list');
     products.forEach(p => {
-        const card = `
+        list.innerHTML += `
             <div class="product-card">
                 <div class="product-img-wrapper">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${p.n}&backgroundColor=b6e3f4" alt="${p.n}">
+                    <img src="${p.img}" alt="${p.n}">
                 </div>
                 <div class="info">
                     <span class="name">${p.n} <span class="age">(${p.a})</span></span>
@@ -195,7 +157,6 @@
                 <button class="order-btn" onclick="openCheckout('${p.n}', ${p.p})">ORDER</button>
             </div>
         `;
-        listContainer.innerHTML += card;
     });
 
     function openCheckout(name, price) {
@@ -203,7 +164,7 @@
         selectedPrice = price;
         document.getElementById('modalTitle').innerText = "Order " + name;
         document.getElementById('checkoutOverlay').style.display = 'flex';
-        tg.HapticFeedback.impactOccurred('medium');
+        tg.HapticFeedback.notificationOccurred('success');
     }
 
     function closeModal() {
@@ -211,12 +172,12 @@
     }
 
     function finalSubmit() {
-        const name = document.getElementById('custName').value;
-        const phone = document.getElementById('custPhone').value;
-        const addr = document.getElementById('custAddr').value;
+        const name = document.getElementById('custName').value.trim();
+        const phone = document.getElementById('custPhone').value.trim();
+        const addr = document.getElementById('custAddr').value.trim();
 
         if(!name || !phone || !addr) {
-            tg.showAlert("ദയവായി എല്ലാ വിവരങ്ങളും നൽകുക!");
+            tg.showAlert("Please fill all details!");
             return;
         }
 
@@ -228,8 +189,12 @@
             address: addr
         };
 
+        // CRITICAL FIX: Send data and wait slightly before closing
         tg.sendData(JSON.stringify(orderData));
-        tg.close();
+        
+        setTimeout(() => {
+            tg.close();
+        }, 150);
     }
 </script>
 </body>
